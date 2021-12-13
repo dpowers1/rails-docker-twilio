@@ -1,0 +1,52 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @user.name %>
+</p>
+
+<p>
+  <strong>Country code:</strong>
+  <%= @user.country_code %>
+</p>
+
+<p>
+  <strong>Phone number:</strong>
+  <%= @user.phone_number %>
+</p>
+
+<h2>Send a text:</h2>
+<%= form_with model: [ @user, @user.texts.build ] do |form| %>
+  <p>
+    <%= form.label :outbound %><br>
+    <%= form.text_area :outbound %>
+  </p>
+  <p>
+    <%= form.submit 'Send Text' %>
+  </p>
+<% end %>
+
+<h2>Texts</h2>
+<table>
+  <thead>
+    <tr>
+      <th>Outbound</th>
+      <th>Inbound</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @user.texts.each do |text| %>
+      <tr>
+        <td><%= text.outbound %></td>
+
+        <td><%= text.inbound %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+
+<%= link_to 'Edit User', edit_user_path(@user) %> |
+<%= link_to 'Back', users_path %>
